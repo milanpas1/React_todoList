@@ -1,0 +1,204 @@
+/* Dark Theme Authentication Components Styles */
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  padding: 2rem;
+}
+
+.auth-card {
+  background: rgba(30, 30, 50, 0.95);
+  backdrop-filter: blur(15px);
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 3rem;
+  width: 100%;
+  max-width: 480px;
+  animation: slideInUp 0.8s ease;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.auth-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+}
+
+.auth-subtitle {
+  color: #e2e8f0;
+  font-size: 1rem;
+  margin: 0;
+  opacity: 0.8;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.auth-input {
+  margin-bottom: 0 !important;
+}
+
+/* Custom styling for MUI TextField in dark theme */
+.auth-input .MuiOutlinedInput-root {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  border-radius: 12px !important;
+  color: #f1f5f9 !important;
+}
+
+.auth-input .MuiOutlinedInput-root fieldset {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.auth-input .MuiOutlinedInput-root:hover fieldset {
+  border-color: #60a5fa !important;
+}
+
+.auth-input .MuiOutlinedInput-root.Mui-focused fieldset {
+  border-color: #60a5fa !important;
+  border-width: 2px !important;
+}
+
+.auth-input .MuiInputLabel-root {
+  color: #cbd5e1 !important;
+}
+
+.auth-input .MuiInputLabel-root.Mui-focused {
+  color: #60a5fa !important;
+}
+
+.auth-input .MuiOutlinedInput-input {
+  color: #f1f5f9 !important;
+}
+
+.auth-input .MuiOutlinedInput-input::placeholder {
+  color: #94a3b8 !important;
+  opacity: 1 !important;
+}
+
+.name-fields {
+  display: flex;
+  gap: 1rem;
+}
+
+.half-width {
+  flex: 1;
+}
+
+.auth-button {
+  margin-top: 0.5rem !important;
+  height: 48px;
+  font-size: 1rem !important;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6) !important;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4) !important;
+  transition: all 0.3s ease !important;
+  border: none !important;
+  color: white !important;
+}
+
+.auth-button:hover {
+  background: linear-gradient(135deg, #2563eb, #7c3aed) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.6) !important;
+}
+
+.auth-button:disabled {
+  background: rgba(100, 116, 139, 0.6) !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.auth-links {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.auth-links p {
+  color: #cbd5e1;
+  margin: 0;
+}
+
+.auth-link {
+  color: #60a5fa;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.auth-link:hover {
+  color: #93c5fd;
+  text-decoration: underline;
+}
+
+.auth-alert {
+  border-radius: 12px !important;
+  margin-bottom: 0 !important;
+  background-color: rgba(239, 68, 68, 0.15) !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+  color: #fca5a5 !important;
+}
+
+.auth-alert .MuiAlert-icon {
+  color: #ef4444 !important;
+}
+
+/* Animations */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .auth-container {
+    padding: 1rem;
+  }
+
+  .auth-card {
+    padding: 2rem;
+    border-radius: 20px;
+  }
+
+  .auth-title {
+    font-size: 1.8rem;
+  }
+
+  .name-fields {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .half-width {
+    flex: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 1.5rem;
+  }
+
+  .auth-title {
+    font-size: 1.6rem;
+  }
+}

@@ -1,0 +1,97 @@
+/* Modern Navbar Styles - Dark Theme */
+.navbar {
+  background: linear-gradient(
+    135deg,
+    #1e293b 0%,
+    #334155 50%,
+    #475569 100%
+  ) !important;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem 0;
+  transition: all 0.3s ease;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: white !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-weight: 500;
+  padding: 0.5rem 1.5rem !important;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  margin: 0 0.2rem;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  background: rgba(96, 165, 250, 0.2);
+  color: white !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(96, 165, 250, 0.3);
+}
+
+.nav-link.active {
+  background: rgba(96, 165, 250, 0.3);
+  color: white !important;
+  font-weight: 600;
+}
+
+.navbar-toggler {
+  border: none;
+  color: white;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+/* Logo/Brand Icon */
+.navbar-brand::before {
+  content: "✓";
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+  animation: bounce 2s infinite;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.5rem 0;
+  }
+
+  .nav-link {
+    padding: 0.5rem 1rem !important;
+    margin: 0.2rem 0;
+  }
+
+  .navbar-brand {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0.3rem 0;
+  }
+
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+
+  .nav-link {
+    padding: 0.4rem 0.8rem !important;
+    font-size: 0.9rem;
+    margin: 0.1rem 0;
+  }
+
+  .navbar-toggler {
+    padding: 0.25rem 0.5rem;
+    font-size: 1rem;
+  }
+}

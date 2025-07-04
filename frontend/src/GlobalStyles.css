@@ -1,0 +1,146 @@
+/* Global Styles for Modern Todo App - Dark Theme */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  min-height: 100vh;
+  color: #f1f5f9;
+  /* Prevent horizontal scroll on mobile */
+  overflow-x: hidden;
+}
+
+.container {
+  background: rgba(30, 30, 50, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  margin-top: 100px;
+  min-height: calc(100vh - 120px);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(30, 30, 50, 0.8);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    margin-top: 80px;
+    padding: 1rem;
+    border-radius: 15px;
+  }
+
+  body {
+    font-size: 14px;
+  }
+
+  /* Better touch scrolling */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Prevent zoom on input focus */
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  /* Remove tap highlight on mobile */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Ensure minimum touch target size */
+  button,
+  .btn,
+  .task-checkbox,
+  .nav-link {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    margin-top: 70px;
+    padding: 0.5rem;
+    border-radius: 12px;
+  }
+
+  body {
+    font-size: 13px;
+  }
+
+  /* Ensure touch targets are large enough */
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Better touch scrolling */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+}

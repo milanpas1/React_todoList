@@ -1,6 +1,4 @@
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import { v4 as uuidv4 } from "uuid";
 import { useState, useEffect } from "react";
 import "./ToDoList.css";
 import Checkbox from "@mui/material/Checkbox";
@@ -13,7 +11,7 @@ function ToDoList() {
   let [allTasks, setAllTasks] = useState([]);
 
   function fetchdata() {
-    axios.get("http://localhost:3002/").then((res) => {
+    axios.get("http://localhost:3002/allTodo").then((res) => {
       setAllTasks(res.data);
     });
   }
@@ -21,9 +19,12 @@ function ToDoList() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (task.trim() === "") return;
+
     axios
-      .post("http://localhost:3002/", {
+      .post("http://localhost:3002/allTodo", {
         todo: task,
+        isDone: false,
       })
       .then(fetchdata);
     setTask("");
@@ -32,54 +33,138 @@ function ToDoList() {
   function handleChange(e) {
     setTask(e.target.value);
   }
-  function handleDelete(id) {
-    axios.delete(`http://localhost:3002/${id}/delete`
-    )
-      .then((response=>{
-        console.log("delete response ", response.data)
-        fetchdata()
-      }))
-    
+
+  function handleDone(id) {
+    axios.put(`http://localhost:3002/allTodo/${id}/done`).then((response) => {
+      console.log("Done task ", response.data);
+      fetchdata();
+    });
   }
+
+  function handleDelete(id) {
+    axios
+      .delete(`http://localhost:3002/allTodo/${id}/delete`)
+      .then((response) => {
+        console.log("Delete task ", response.data);
+        fetchdata();
+      })
+      .catch((e) => {
+        console.error("Error deleting task", e);
+      });
+  }
+
+  const activeTasks = allTasks.filter((task) => task.isDone === false);
+
   return (
-    <>
-      <div className="row">
-        <div className="col-6">
-          <form action="" onSubmit={handleSubmit}>
+    <div className="todo-container">
+      {/* Header Section */}
+      <div className="todo-header">
+        <h1 className="todo-title">Task Manager</h1>
+        <p className="todo-subtitle">
+          Stay organized and boost your productivity
+        </p>
+      </div>
+
+      {/* Task Input Section */}
+      <div className="task-input-section">
+        <form onSubmit={handleSubmit}>
+          <div className="input-group">
             <TextField
-              id="standard-basic"
+              className="task-input"
+              id="task-input"
               value={task}
-              label="Enter Task"
-              variant="standard"
+              label="What needs to be done?"
+              variant="outlined"
               onChange={handleChange}
-              className="mt-5 ms-5 "
+              fullWidth
+              autoComplete="off"
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "15px",
+                  backgroundColor: "rgba(255, 255, 255, 0.05)",
+                  color: "#f1f5f9",
+                  "& fieldset": {
+                    borderColor: "rgba(255, 255, 255, 0.2)",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "#60a5fa",
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#60a5fa",
+                    borderWidth: "2px",
+                  },
+                },
+                "& .MuiInputLabel-root": {
+                  color: "#cbd5e1",
+                  "&.Mui-focused": {
+                    color: "#60a5fa",
+                  },
+                },
+                "& .MuiOutlinedInput-input": {
+                  color: "#f1f5f9",
+                  "&::placeholder": {
+                    color: "#94a3b8",
+                    opacity: 1,
+                  },
+                },
+              }}
             />
             <button
               type="submit"
-              className="btn btn-success mt-5 ms-2"
-              style={{
-                height: "3.2rem",
-              }}
+              className="btn btn-primary add-button"
+              disabled={task.trim() === ""}
             >
-              Add Task
+              ✨ Add Task
             </button>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
-      <div className="row">
-        <div className="col-4">
-          <ul className="allTasks mt-3">
-            {allTasks.map((el) => (
-              <div className="task-item" key={el._id}>
-                <Checkbox onChange={() => handleDelete(el._id)} {...label} />
-                <li>{el.todo}</li>
+
+      {/* Tasks Section */}
+      <div className="tasks-section">
+        <div className="tasks-container">
+          <div className="tasks-header">
+            <h2 className="tasks-title">📝 Active Tasks</h2>
+            <span className="tasks-count">{activeTasks.length}</span>
+          </div>
+
+          {activeTasks.length === 0 ? (
+            <div className="empty-state">
+              <div className="empty-state-icon">🎯</div>
+              <div className="empty-state-text">No active tasks!</div>
+              <div className="empty-state-subtext">
+                Add a task above to get started
               </div>
-            ))}
-          </ul>
+            </div>
+          ) : (
+            <ul className="allTasks">
+              {activeTasks.map((el) => (
+                <div key={el._id} className="task-item">
+                  <Checkbox
+                    onChange={() => handleDone(el._id)}
+                    {...label}
+                    className="task-checkbox"
+                    sx={{
+                      "&:hover": {
+                        backgroundColor: "rgba(102, 126, 234, 0.04)",
+                      },
+                    }}
+                  />
+                  <li>{el.todo}</li>
+                  <button
+                    onClick={() => handleDelete(el._id)}
+                    type="button"
+                    className="btn btn-danger delete-button"
+                  >
+                    🗑️ Delete
+                  </button>
+                </div>
+              ))}
+            </ul>
+          )}
         </div>
-        <div className="col-4"></div>
       </div>
-    </>
+    </div>
   );
 }
 
